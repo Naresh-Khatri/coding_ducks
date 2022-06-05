@@ -19,22 +19,23 @@
         <div class="title">{{ headerName }}</div>
       </div>
     </div>
-    <codemirror
-      v-model="cCode"
-      placeholder="Code goes here..."
-      :style="{
-        height: '600px',
-        fontFamily: 'monospace',
-        fontSize: '20px',
-        fontFamily: 'Arial, monospace',
-      }"
-      :autofocus="true"
-      :indent-with-tab="true"
-      :tabSize="4"
-      :extensions="extensions"
-      @change="change"
-      :key="language + theme"
-    />
+    <code>
+      <codemirror
+        style="font-family: monospace"
+        v-model="cCode"
+        placeholder="Code goes here..."
+        :style="{
+          height: '600px',
+          fontSize: '24px',
+        }"
+        :autofocus="true"
+        :indent-with-tab="true"
+        :tabSize="4"
+        :extensions="extensions"
+        @change="change"
+        :key="language + theme"
+      />
+    </code>
     <!-- <Codemirror
       class="codemirror-editor"
       v-model:value="cCode"
@@ -158,7 +159,7 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   overflow: hidden;
 }
@@ -227,14 +228,20 @@ onMounted(() => {
   -webkit-box-shadow: -5px 7px 0px 1px rgba(0, 0, 0, 1);
   -moz-box-shadow: -5px 7px 0px 1px rgba(0, 0, 0, 1);
 }
-.codemirror-editor {
-  display: block;
-  font-family: monospace;
-  white-space: pre;
-  font-size: 1.5em;
-  border-radius: 0 0 10px 10px;
-}
 .CodeMirror * {
-  font-family: Consolas, monaco, monospace;
+  /*          ^
+*/
+  font-family: Arial, monospace;
+  font-size: 16px;
 }
+// .codemirror-editor {
+//   display: block;
+//   font-family: monospace;
+//   white-space: pre;
+//   font-size: 1.5em;
+//   border-radius: 0 0 10px 10px;
+// }
+// .CodeMirror * {
+//   font-family: Consolas, monaco, monospace;
+// }
 </style>

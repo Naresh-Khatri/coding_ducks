@@ -77,7 +77,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, initCustomFormatter } from "vue";
+import { ref, onMounted, computed } from "vue";
 import ProfileInfo from "src/components/ProfileInfo.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useQuasar, date } from "quasar";
@@ -85,6 +85,7 @@ import { useQuasar, date } from "quasar";
 import { useProblemStore } from "src/stores/problems";
 import { useUserStore } from "src/stores/user";
 import { useSubmissionStore } from "src/stores/submissions";
+import { async } from "@firebase/util";
 
 const $route = useRoute();
 const $router = useRouter();
@@ -96,7 +97,7 @@ const submissionStore = useSubmissionStore();
 
 const problems = computed(() => problemStore.problems);
 
-const remainingTime = ref("");
+const remainingTime = ref("calculating...");
 
 const colors = computed(
   () =>
@@ -118,8 +119,10 @@ const colors = computed(
 );
 
 onMounted(async () => {
-  await submissionStore.fetchSubmissions();
-  const res = await problemStore.fetchProblems();
+  await problemStore.fetchProblems();
+  setTimeout(async () => {
+    await submissionStore.fetchSubmissions();
+  }, 1000);
   if ($route.params.problemNum)
     problemStore.setCurrentProblem($route.params.problemNum - 1);
   else {
@@ -128,45 +131,61 @@ onMounted(async () => {
       params: { problemNum: 1 },
     });
   }
+  const timer = ref(null);
+  const minLeft = ref(0);
+  const secsLeft = ref(0);
   //start timer
-  updateTimer();
-  setInterval(() => {
-    updateTimer();
+  timer.value = setInterval(() => {
+    const startedTime = new Date(userStore.user.startedOn);
+    if (!userStore.user.startedOn) {
+      remainingTime.value = "calculating...";
+      //this is a hack to fix NaN timer error by refetching the user
+      userStore.fetchLoggedInUser();
+      return;
+    }
+    //startedTime from shanghai to local time
+    const localStartedTime = new Date(
+      startedTime.getTime() - 2.5 * 60 * 60 * 1000
+    );
+    const currTime = new Date();
+    minLeft.value =
+      59 - date.getDateDiff(currTime, localStartedTime, "minutes");
+    secsLeft.value =
+      60 - (date.getDateDiff(currTime, startedTime, "seconds") % 60);
+    remainingTime.value = `00:${
+      minLeft.value < 10 ? "0" + minLeft.value : minLeft.value
+    }:${
+      secsLeft.value % 60 < 10
+        ? "0" + (secsLeft.value % 60)
+        : secsLeft.value % 60
+    }`;
+    //dont let user when time is up
+    if (minLeft.value <= 0) {
+      clearInterval(timer.value);
+      $q.notify({
+        color: "negative",
+        textColor: "white",
+        message: "Your time is up!",
+      });
+      $router.push({ name: "feedback" });
+    }
   }, 1000);
-
-  // console.log(res);
-
-  // console.log(submissionStore.submissions);
-  // console.log(colors.value);
 });
-const updateTimer = () => {
-  const startedTime = new Date(userStore.user.startedOn);
-  //startedTime from shanghai to local time
-  const localStartedTime = new Date(
-    startedTime.getTime() - 2.5 * 60 * 60 * 1000
-  );
-  const currTime = new Date();
-  const minLeft = 60 - date.getDateDiff(currTime, localStartedTime, "minutes");
-  const secsLeft =
-    60 - (date.getDateDiff(currTime, startedTime, "seconds") % 60);
-  remainingTime.value = `00:${minLeft < 10 ? "0" + minLeft : minLeft}:${
-    secsLeft % 60 < 10 ? "0" + (secsLeft % 60) : secsLeft % 60
-  }`;
-  if (minLeft <= 0) {
-    endTest();
-  }
-};
 
 const drawer = ref(false);
 const miniState = ref(true);
 
-const endTest = () => {
-  userStore.logout();
-  $router.push("/");
+const endTest = (message) => {
   $q.notify({
-    color: "positive",
+    color: message ? "negative" : "positive",
     textColor: "white",
-    message: "Logged out successfully",
+    message: message || "Logged out successfully",
+  });
+  $q.dialog({
+    title: "Logout",
+    message: "Are you sure you want to logout?",
+  }).onOk(() => {
+    $router.push({ name: "feedback" });
   });
 };
 </script>

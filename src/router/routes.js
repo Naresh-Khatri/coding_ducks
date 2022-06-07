@@ -23,6 +23,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/feedback",
+    name: "feedback",
+    component: () => import("pages/FeedbackPage.vue"),
+  },
 
   // Always leave this as last one,
   // but you can also remove it

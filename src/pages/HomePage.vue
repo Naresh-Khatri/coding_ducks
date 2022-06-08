@@ -1,75 +1,105 @@
 <template>
   <!-- <div id="cursorBlob" ref="CURSOR"></div> -->
-  <header class="header flex justify-between">
-    <div class="logo text-primary">&lt;hackoverflow /&gt;</div>
-    <div class="get-started">
-      <router-link to="/login">
-        <q-btn
-          flat
-          rounded
-          size="18px"
-          class="bg-primary text-white"
-          label="get started"
-        />
-      </router-link>
-    </div>
-  </header>
-  <div class="container">
-    <main class="hero flex">
-      <section class="col">
-        <div class="text-h1">&lt;hackoverflow /&gt;</div>
-        <div class="">2022</div>
-        <div>
+  <div style="display: relative; height: 100vh; overflow: ">
+    <header class="header flex justify-between">
+      <div class="logo text-primary">
+        <!-- &lt;CodingDucks /&gt; -->
+      </div>
+      <div class="get-started">
+        <router-link to="/login">
           <q-btn
-            size="lg"
-            class="rounded bg-primary q-px-lg text-secondary"
             flat
-            round
+            rounded
+            size="18px"
+            class="bg-primary text-white"
             label="get started"
-            icon-right="send"
           />
-        </div>
-      </section>
-      <section class="col"><q-img :src="HeroImg" /></section>
-    </main>
-  </div>
-  <svg
-    style="position: absolute; bottom: -100px"
-    width="100%"
-    height="100%"
-    id="svg"
-    viewBox="0 0 1440 500"
-    xmlns="http://www.w3.org/2000/svg"
-    class="transition duration-300 ease-in-out delay-150"
-  >
-    <defs>
-      <linearGradient id="gradient" x1="50%" y1="0%" x2="50%" y2="100%">
-        <stop offset="5%" stop-color="#cfbdec88"></stop>
-        <stop offset="95%" stop-color="#742ff688"></stop>
-      </linearGradient>
-    </defs>
-    <path
-      d="M 0,500 C 0,500 0,166 0,166 C 89.74162679425837,168.50717703349284 179.48325358851673,171.01435406698565 269,162 C 358.51674641148327,152.98564593301435 447.8086124401914,132.44976076555022 549,142 C 650.1913875598086,151.55023923444978 763.2822966507177,191.18660287081337 874,187 C 984.7177033492823,182.81339712918663 1093.0622009569377,134.80382775119617 1187,124 C 1280.9377990430623,113.19617224880383 1360.468899521531,139.5980861244019 1440,166 C 1440,166 1440,500 1440,500 Z"
-      stroke="none"
-      stroke-width="0"
-      fill="url(#gradient)"
-      class="transition-all duration-300 ease-in-out delay-150 path-0"
-    ></path>
+        </router-link>
+      </div>
+    </header>
+    <div class="container">
+      <main class="hero flex q-mt-lg row">
+        <section class="col-8 flex items-center">
+          <div
+            class="text-h1"
+            style="font-size: 64px; font-weight: 800; color: #2d3748"
+          >
+            <span class="text-primary">&lt;</span>CodingDucks<span
+              class="text-primary"
+            >
+              /&gt;</span
+            >
+          </div>
+          <div
+            style="
+              font-size: 20px;
+              font-weight: 400;
+              color: #718096;
+              padding-right: 200px;
+              padding-left: 40px;
+            "
+          >
+            CodingDucks is a small project developed for the sole purpose of
+            helping students learn to code. It is a simple, fun, and educational
+            platform for students to practice their coding skills.
+          </div>
+          <div class="q-mt-lg q-ml-xl">
+            <router-link to="/login">
+              <q-btn
+                size="lg"
+                class="rounded bg-primary q-px-lg text-secondary"
+                flat
+                round
+                label="get started"
+                icon-right="send"
+              />
+            </router-link>
+          </div>
+        </section>
+        <section class="col-4 flex justify-center">
+          <q-img style="max-width: 100%" :src="HeroImg" />
+        </section>
+      </main>
+    </div>
+    <div style="position: absolute; bottom: -50px; width: 100vw">
+      <svg
+        width="100%"
+        height="100%"
+        id="svg"
+        viewBox="0 0 1440 500"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition duration-300 ease-in-out delay-150"
+      >
+        <defs>
+          <linearGradient id="gradient" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="5%" stop-color="#cfbdec88"></stop>
+            <stop offset="95%" stop-color="#742ff688"></stop>
+          </linearGradient>
+        </defs>
+        <path
+          d="M 0,500 C 0,500 0,166 0,166 C 89.74162679425837,168.50717703349284 179.48325358851673,171.01435406698565 269,162 C 358.51674641148327,152.98564593301435 447.8086124401914,132.44976076555022 549,142 C 650.1913875598086,151.55023923444978 763.2822966507177,191.18660287081337 874,187 C 984.7177033492823,182.81339712918663 1093.0622009569377,134.80382775119617 1187,124 C 1280.9377990430623,113.19617224880383 1360.468899521531,139.5980861244019 1440,166 C 1440,166 1440,500 1440,500 Z"
+          stroke="none"
+          stroke-width="0"
+          fill="url(#gradient)"
+          class="transition-all duration-300 ease-in-out delay-150 path-0"
+        ></path>
 
-    <defs>
-      <linearGradient id="gradient" x1="50%" y1="0%" x2="50%" y2="100%">
-        <stop offset="5%" stop-color="#cfbdecff"></stop>
-        <stop offset="95%" stop-color="#742ff6ff"></stop>
-      </linearGradient>
-    </defs>
-    <path
-      d="M 0,500 C 0,500 0,333 0,333 C 83.50239234449762,338.1387559808612 167.00478468899524,343.2775119617225 282,330 C 396.99521531100476,316.7224880382775 543.4832535885167,285.0287081339713 628,279 C 712.5167464114833,272.9712918660287 735.0622009569377,292.6076555023924 815,315 C 894.9377990430623,337.3923444976076 1032.267942583732,362.5406698564594 1146,366 C 1259.732057416268,369.4593301435406 1349.8660287081339,351.22966507177034 1440,333 C 1440,333 1440,500 1440,500 Z"
-      stroke="none"
-      stroke-width="0"
-      fill="url(#gradient)"
-      class="transition-all duration-300 ease-in-out delay-150 path-1"
-    ></path>
-  </svg>
+        <defs>
+          <linearGradient id="gradient" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="5%" stop-color="#cfbdecff"></stop>
+            <stop offset="95%" stop-color="#742ff6ff"></stop>
+          </linearGradient>
+        </defs>
+        <path
+          d="M 0,500 C 0,500 0,333 0,333 C 83.50239234449762,338.1387559808612 167.00478468899524,343.2775119617225 282,330 C 396.99521531100476,316.7224880382775 543.4832535885167,285.0287081339713 628,279 C 712.5167464114833,272.9712918660287 735.0622009569377,292.6076555023924 815,315 C 894.9377990430623,337.3923444976076 1032.267942583732,362.5406698564594 1146,366 C 1259.732057416268,369.4593301435406 1349.8660287081339,351.22966507177034 1440,333 C 1440,333 1440,500 1440,500 Z"
+          stroke="none"
+          stroke-width="0"
+          fill="url(#gradient)"
+          class="transition-all duration-300 ease-in-out delay-150 path-1"
+        ></path>
+      </svg>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -98,10 +128,14 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css?family=Montserrat:900");
+* {
+  font-family: "Inter", sans-serif;
+}
 .container {
   display: flex;
   flex-direction: column;
   padding: 0 200px;
+  margin-top: 100px;
   // height: calc(100vh - 100px);
   // height: 100vh;
 }

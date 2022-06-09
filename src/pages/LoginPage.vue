@@ -53,7 +53,7 @@ https://img.favpng.com/15/12/25/google-logo-google-adwords-g-suite-google-accoun
               label="Roll No."
               class="q-mt-sm"
               style="width: 100%"
-              :rules="[(val) => val.length != 10, 'Incorrect roll']"
+              :rules="[(val) => val.length == 10 || 'Incorrect roll']"
             >
               <template v-slot:prepend>
                 <q-icon name="tag" />

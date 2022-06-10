@@ -94,6 +94,8 @@ import { api } from "src/boot/axios";
 
 import { nanoid } from "nanoid";
 
+import SubmissionDialog from "src/components/dialogs/SubmissionDialog.vue";
+
 import cLogo from "../assets/c.svg";
 import cppLogo from "../assets/cpp.svg";
 import javaLogo from "../assets/java.svg";
@@ -241,6 +243,12 @@ const submit = async () => {
     console.log(res.data);
     submissionStore.fetchSubmissions();
     showResult(res.data);
+    $q.dialog({
+      component: SubmissionDialog,
+      componentProps: {
+        newStars: Number((res.data.passedCount / res.data.totalCount) * 10),
+      },
+    });
   } catch (err) {
     console.log(err);
     $q.loading.hide();
@@ -262,7 +270,6 @@ const handleConsoleExpansion = (isExpanded) => {
 };
 
 const showResult = (res) => {
-  console.log(res);
   $q.loading.hide();
   output.value = res.stdout || res.stderr || "";
   if (res.error) {

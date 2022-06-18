@@ -26,14 +26,16 @@ export const useUserStore = defineStore("user", {
         //if logged in then get extra info from server
         const response = await api.get("/users/" + user.uid);
         const { data } = response;
+
         //user not found on server
         if (!data) {
           this.user = {};
           return;
         }
+
         //user found on server
         const { fullname, email, photo_url, google_uid, roll, started_on } =
-          data;
+          data[0];
         this.user = {
           fullname,
           email,
@@ -43,7 +45,7 @@ export const useUserStore = defineStore("user", {
           startedOn: started_on,
         };
         Cookies.set("token", user.accessToken);
-        Cookies.set("refreshToken", user.stsTokenManager.refreshToken);
+        Cookies.set("refreshToken", user.refreshToken);
 
         return this.user;
       } catch (err) {

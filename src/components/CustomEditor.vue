@@ -98,14 +98,6 @@ const props = defineProps({
 });
 const cCode = ref("");
 
-// const lang2mode = {
-//   c: "text/x-c",
-//   cpp: "text/x-c++src",
-//   java: "text/x-java",
-//   python: "text/x-python",
-//   javascript: "text/javascript",
-// };
-
 // const cmOptions = ref({
 //   mode: lang2mode[props.language], // Language mode
 //   theme: props.theme, // Theme

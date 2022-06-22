@@ -5,7 +5,8 @@
         <div class="col">
           <q-img :src="duckImg" height="280px" width="280px" />
         </div>
-        <div class="col flex flex-center column">
+        <div class="col flex flex-center column justify-between">
+          <div></div>
           <div v-if="newStars > 0" class="text-center">
             <div class="text-h2 q-mt-xl">
               +{{ newStars
@@ -23,18 +24,17 @@
               Some test cases failed, check the console.
             </span>
           </div>
+          <div style="align-self: flex-end">
+            <q-btn
+              class="q-mr-xl q-mb-md q-px-lg rounded"
+              color="primary"
+              size="lg"
+              label="OK"
+              @click="onOKClick"
+            />
+          </div>
         </div>
       </div>
-      <q-card-actions align="center">
-        <q-btn
-          class="q-mb-md q-mr-md"
-          color="primary"
-          size="lg"
-          rounded
-          label="OK"
-          @click="onOKClick"
-        />
-      </q-card-actions>
     </q-card>
   </q-dialog>
 </template>

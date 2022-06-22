@@ -1,6 +1,6 @@
-# hackathon (hackathon)
+# Quasar App (quasar-project)
 
-hackathon
+A Quasar Project
 
 ## Install the dependencies
 ```bash

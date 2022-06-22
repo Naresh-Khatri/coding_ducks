@@ -198,6 +198,7 @@ const overallRating = ref(4);
 const futureEvent = ref(false);
 const text = ref("");
 const step = ref(0);
+
 const changeTick = (val = 1) => {
   step.value += val;
 };

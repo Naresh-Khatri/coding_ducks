@@ -151,10 +151,8 @@ const loginWithGoogle = () => {
   const auth = getAuth();
   signInWithPopup(auth, provider)
     .then(async (res) => {
-      console.log(res);
       //get extra info from db
       const loggedUser = await userStore.fetchLoggedInUser();
-      console.log(loggedUser);
       if (loggedUser) $router.push("/main");
       user.value = {
         googleUID: res.user.uid,
@@ -173,8 +171,8 @@ const loginWithGoogle = () => {
 
 const submit = () => {
   //TODO: submit to server
-  console.log(user.value);
-  console.log(userStore.user);
+  // console.log(user.value);
+  // console.log(userStore.user);
   api
     .post("/users", user.value)
     .then((res) => {

@@ -85,7 +85,6 @@ import { useQuasar, date } from "quasar";
 import { useProblemStore } from "src/stores/problems";
 import { useUserStore } from "src/stores/user";
 import { useSubmissionStore } from "src/stores/submissions";
-import { async } from "@firebase/util";
 
 const $route = useRoute();
 const $router = useRouter();

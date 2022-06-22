@@ -19,23 +19,30 @@
         <div class="title">{{ headerName }}</div>
       </div>
     </div>
-    <code>
-      <codemirror
-        style="font-family: monospace"
+    <!-- <codemirror
         v-model="cCode"
         placeholder="Code goes here..."
-        :style="{
-          height: '600px',
-          fontSize: '24px',
-        }"
+        :style="{ height: '400px' }"
         :autofocus="true"
         :indent-with-tab="true"
-        :tabSize="4"
+        :tab-size="4"
         :extensions="extensions"
-        @change="change"
-        :key="language + theme"
-      />
-    </code>
+      /> -->
+    <codemirror
+      style="font-family: monospace"
+      v-model="cCode"
+      placeholder="Code goes here..."
+      :style="{
+        height: '600px',
+        fontSize: '24px',
+      }"
+      :autofocus="true"
+      :indent-with-tab="true"
+      :tabSize="4"
+      :extensions="extensions"
+      @change="change"
+      :key="language + theme"
+    />
     <!-- <Codemirror
       class="codemirror-editor"
       v-model:value="cCode"
@@ -50,13 +57,15 @@
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
+import "../css/reset.scss";
 
 import { Codemirror } from "vue-codemirror";
 import { python } from "@codemirror/lang-python";
 import { cpp } from "@codemirror/lang-cpp";
-import { java } from "@codemirror/lang-java";
-import { javascript } from "@codemirror/lang-javascript";
+// import { java } from "@codemirror/lang-java";
+// import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { compileScript } from "@vue/compiler-sfc";
 
 const extensions = [python(), oneDark];
 
@@ -109,12 +118,12 @@ const cCode = ref("");
 //   styleActiveLine: true, // Display the style of the selected row
 // });
 
-watch(
-  () => props.theme,
-  (newVal, oldVal) => {
-    cmOptions.value.theme = newVal;
-  }
-);
+// watch(
+//   () => props.theme,
+//   (newVal, oldVal) => {
+//     cmOptions.value.theme = newVal;
+//   }
+// );
 watch(
   () => props.language,
   (newVal) => {
@@ -154,6 +163,9 @@ onMounted(() => {
 <style lang="scss" scoped>
 * {
   overflow: hidden;
+}
+.monaco-container:deep(.cm-editor) {
+  display: inline;
 }
 .monaco-editor {
   border-radius: 30px;

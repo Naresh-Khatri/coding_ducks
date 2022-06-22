@@ -2,42 +2,27 @@
   <codemirror
     v-model="code"
     placeholder="Code goes here..."
-    :style="{ height: '80vh' }"
+    :style="{ height: '400px' }"
     :autofocus="true"
     :indent-with-tab="true"
-    :tabSize="2"
+    :tab-size="4"
     :extensions="extensions"
-    @ready="log('ready', $event)"
-    @change="log('change', $event)"
-    @focus="log('focus', $event)"
-    @blur="log('blur', $event)"
   />
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import { Codemirror } from "vue-codemirror";
-
 import { javascript } from "@codemirror/lang-javascript";
 import { python } from "@codemirror/lang-python";
-import { cpp } from "@codemirror/lang-cpp";
-import { java } from "@codemirror/lang-java";
-
 import { oneDark } from "@codemirror/theme-one-dark";
 
-export default {
-  components: {
-    Codemirror,
-  },
-  setup() {
-    const code = ref(`console.log('Hello, world!')`);
-    const extensions = [cpp(), oneDark];
-
-    return {
-      code,
-      extensions,
-      log: console.log,
-    };
-  },
-};
+const code = ref(`console.log('Hello, world!')`);
+const extensions = [python(), oneDark];
 </script>
+
+<style scoped>
+* {
+  font-size: 25px;
+}
+</style>

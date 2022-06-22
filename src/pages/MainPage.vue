@@ -92,8 +92,6 @@ import { useQuasar } from "quasar";
 
 import { api } from "src/boot/axios";
 
-import { nanoid } from "nanoid";
-
 import SubmissionDialog from "src/components/dialogs/SubmissionDialog.vue";
 
 import cLogo from "../assets/c.svg";
@@ -176,11 +174,10 @@ const changeLang = (lang) => {
 
 onMounted(() => {
   loadSavedFile();
-  console.log("mounted");
   //TODO: show 404 page if problem not found
   try {
     problemStore.setCurrentProblem($route.params.problemNum - 1);
-    console.log(problemStore);
+    // console.log(problemStore);
   } catch (err) {
     $router.push("/404");
   }
@@ -240,7 +237,7 @@ const submit = async () => {
       lang: selectedLang.value,
       problemNum: $route.params.problemNum - 1,
     });
-    console.log(res.data);
+    // console.log(res.data);
     submissionStore.fetchSubmissions();
     showResult(res.data);
     $q.dialog({
@@ -278,7 +275,7 @@ const showResult = (res) => {
   }
   //show 🎊🎊🎊 when passed
   if (res.totalCount == res.passedCount) showConfetti();
-  console.log(problemStore.problems, problemStore.currentProblem);
+  // console.log(problemStore.problems, problemStore.currentProblem);
   problemStore.problems[problemStore.currentProblem.id - 1].score =
     res.passedCount / res.totalCount;
 
@@ -286,7 +283,7 @@ const showResult = (res) => {
     res.passedCount / res.totalCount === 1 ? "😎😍" : "😵"
   }\n\n`;
   let testCases = res.tests;
-  console.log(testCases);
+  // console.log(testCases);
   if (!testCases) return;
   testCases.forEach((test, index) => {
     output.value += `test #${index + 1}\ninput :\n${test.input}

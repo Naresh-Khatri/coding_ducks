@@ -57,7 +57,6 @@
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
-import "../css/reset.scss";
 
 import { Codemirror } from "vue-codemirror";
 import { python } from "@codemirror/lang-python";

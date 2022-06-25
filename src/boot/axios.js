@@ -8,10 +8,10 @@ let api = null;
 
 export default boot(({ app }) => {
   const cookies = process.env.SERVER ? Cookies.parseSSR(ssrContext) : Cookies;
-  const baseURL = "https://coding_ducks.panipuri.tech";
-  // const baseURL = process.env.DEV
-  //   ? "http://localhost:3333"
-  //   : "https://coding_ducks.panipuri.tech";
+  // const baseURL = "https://coding_ducks.panipuri.tech";
+  const baseURL = process.env.DEV
+    ? "http://localhost:3333"
+    : "https://coding_ducks.panipuri.tech";
   // process.env.SERVER
   // ? "http://localhost:3333"
   // : "http://api.couponluxury.com";

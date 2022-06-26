@@ -102,7 +102,7 @@
 
 <script setup>
 import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.5.1-FOulXvdGbkdJFGKB7EdB/mode=imports,min/optimized/canvas-confetti.js";
-import { ref, onMounted, watchEffect, watch } from "vue";
+import { ref, onMounted, onUnmounted, watchEffect, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useProblemStore } from "src/stores/problems";
 import { useSubmissionStore } from "src/stores/submissions";
@@ -195,7 +195,6 @@ const inactiveWarnCount = ref(3);
 
 onMounted(() => {
   document.addEventListener("visibilitychange", (e) => {
-    console.log("visibilitychange", document.visibilityState);
     if (document.visibilityState == "hidden") {
       inactiveWarnCount.value--;
       $q.dialog({
@@ -205,11 +204,6 @@ onMounted(() => {
         },
       });
     }
-    // $q.dialog({
-    //   message: "You are now in background",
-    //   color: "negative",
-    //   icon: "warning",
-    // });
   });
   loadSavedFile();
   //TODO: show 404 page if problem not found
@@ -219,6 +213,9 @@ onMounted(() => {
   } catch (err) {
     $router.push("/404");
   }
+});
+onUnmounted(() => {
+  document.removeEventListener("visibilitychange", (e) => {});
 });
 
 const loadSavedFile = () => {

@@ -8,6 +8,15 @@
           :currentProblem="problemStore.currentProblem"
         />
       </template>
+      <template v-slot:separator>
+        <q-avatar
+          color="primary"
+          text-color="white"
+          size="40px"
+          icon="drag_indicator"
+        />
+      </template>
+
       <template v-slot:after>
         <div class="q-px-md q-mb-sm flex justify-between" style="height: 40px">
           <q-btn flat round icon="light_mode" color="primary" disable>
@@ -68,6 +77,15 @@
               />
             </code>
           </template>
+          <template v-slot:separator>
+            <q-avatar
+              color="primary"
+              text-color="white"
+              size="30px"
+              icon="drag_indicator"
+            />
+          </template>
+
           <template v-slot:after>
             <Console
               header-name="console"
@@ -93,6 +111,7 @@ import { useQuasar } from "quasar";
 import { api } from "src/boot/axios";
 
 import SubmissionDialog from "src/components/dialogs/SubmissionDialog.vue";
+import InactiveWarnDialog from "src/components/dialogs/InactiveWarnDialog.vue";
 
 import cLogo from "../assets/c.svg";
 import cppLogo from "../assets/cpp.svg";
@@ -146,7 +165,7 @@ const themeOptions = ref([
   "duotone-dark",
 ]);
 const selectedTheme = ref("dracula");
-const splitterModelX = ref(30);
+const splitterModelX = ref(40);
 const splitterModelY = ref(70);
 const code = ref("");
 const langOptions = ref([
@@ -172,7 +191,26 @@ const changeLang = (lang) => {
   updateSaveFile();
 };
 
+const inactiveWarnCount = ref(3);
+
 onMounted(() => {
+  document.addEventListener("visibilitychange", (e) => {
+    console.log("visibilitychange", document.visibilityState);
+    if (document.visibilityState == "hidden") {
+      inactiveWarnCount.value--;
+      $q.dialog({
+        component: InactiveWarnDialog,
+        componentProps: {
+          count: inactiveWarnCount.value,
+        },
+      });
+    }
+    // $q.dialog({
+    //   message: "You are now in background",
+    //   color: "negative",
+    //   icon: "warning",
+    // });
+  });
   loadSavedFile();
   //TODO: show 404 page if problem not found
   try {

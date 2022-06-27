@@ -133,24 +133,26 @@ onMounted(async () => {
   const timer = ref(null);
   const minLeft = ref(0);
   const secsLeft = ref(0);
+  const user = await userStore.fetchLoggedInUser();
+  const startTime = new Date(userStore.user.startedOn);
+
+  //redirect to login if not user
   //start timer
   timer.value = setInterval(() => {
-    const startedTime = new Date(userStore.user.startedOn);
     if (!userStore.user.startedOn) {
       remainingTime.value = "calculating...";
       //this is a hack to fix NaN timer error by refetching the user
-      userStore.fetchLoggedInUser();
       return;
     }
-    //startedTime from shanghai to local time
+    //startTime from shanghai to local time
     const localStartedTime = new Date(
-      startedTime.getTime() - 2.5 * 60 * 60 * 1000
+      startTime.getTime() - 2.5 * 60 * 60 * 1000
     );
     const currTime = new Date();
     minLeft.value =
       59 - date.getDateDiff(currTime, localStartedTime, "minutes");
     secsLeft.value =
-      60 - (date.getDateDiff(currTime, startedTime, "seconds") % 60);
+      60 - (date.getDateDiff(currTime, startTime, "seconds") % 60);
     remainingTime.value = `00:${
       minLeft.value < 10 ? "0" + minLeft.value : minLeft.value
     }:${

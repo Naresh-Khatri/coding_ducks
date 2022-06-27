@@ -17,7 +17,7 @@
       <q-separator class="q-my-md" color="primary" />
       <div v-for="(testCase, index) in testCases" :key="index">
         <div style="font-size: 30px; margin-top: 20px">
-          Example: {{ index + 1 }}
+          Test Case: {{ index + 1 }}
         </div>
         <Example :testCase="testCase" />
       </div>

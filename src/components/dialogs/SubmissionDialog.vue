@@ -9,7 +9,7 @@
           <div></div>
           <div v-if="newStars > 0" class="text-center">
             <div class="text-h2 q-mt-xl">
-              +{{ newStars
+              +{{ newStars == 10 ? "10" : newStars.toFixed(2)
               }}<q-icon
                 name="star"
                 style="margin-top: -10px"

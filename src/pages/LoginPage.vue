@@ -189,7 +189,6 @@ const submit = () => {
 onMounted(async () => {
   setTimeout(async () => {
     const user = await authServices.getCurrentUser();
-    console.log(user);
     if (user) {
       $router.push("/main");
       $q.notify({

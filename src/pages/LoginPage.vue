@@ -125,6 +125,7 @@ https://img.favpng.com/15/12/25/google-logo-google-adwords-g-suite-google-accoun
 <script setup>
 import { onMounted, ref } from "vue";
 import { api } from "src/boot/axios";
+import { authServices } from "src/boot/firebase";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { useUserStore } from "src/stores/user";
@@ -185,16 +186,18 @@ const submit = () => {
     });
 };
 
-onMounted(() => {
-  setTimeout(() => {
-    if (userStore.user && userStore.user.email) {
+onMounted(async () => {
+  setTimeout(async () => {
+    const user = await authServices.getCurrentUser();
+    console.log(user);
+    if (user) {
       $router.push("/main");
       $q.notify({
         message: "You are already logged in",
         color: "green",
       });
     }
-  }, 1000);
+  }, 500);
 });
 </script>
 

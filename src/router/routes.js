@@ -14,6 +14,7 @@ const routes = [
   {
     path: "/main",
     component: () => import("layouts/CustomLayout.vue"),
+    meta: { requiresAuth: true },
     children: [
       {
         path: ":problemNum",
@@ -26,7 +27,13 @@ const routes = [
   {
     path: "/feedback",
     name: "feedback",
+    meta: { requiresAuth: true },
     component: () => import("pages/FeedbackPage.vue"),
+  },
+  {
+    path: "/results",
+    name: "results",
+    component: () => import("pages/ResultsPage.vue"),
   },
 
   // Always leave this as last one,

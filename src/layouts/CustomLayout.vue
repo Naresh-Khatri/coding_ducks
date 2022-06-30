@@ -1,6 +1,10 @@
 <template>
   <q-layout view="hHh Lpr lff" container style="height: 100vh" class="shadow-2">
-    <q-header class="bg-primary" style="height: 70px">
+    <q-header
+      class="bg-primary"
+      :class="minLeft < 5 ? 'bg-negative' : ''"
+      style="height: 70px"
+    >
       <q-toolbar class="flex justify-between">
         <div class="flex">
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
@@ -97,6 +101,9 @@ const submissionStore = useSubmissionStore();
 const problems = computed(() => problemStore.problems);
 
 const remainingTime = ref("calculating...");
+const timer = ref(null);
+const minLeft = ref(1000);
+const secsLeft = ref(0);
 
 const colors = computed(
   () =>
@@ -130,9 +137,7 @@ onMounted(async () => {
       params: { problemNum: 1 },
     });
   }
-  const timer = ref(null);
-  const minLeft = ref(0);
-  const secsLeft = ref(0);
+
   const user = await userStore.fetchLoggedInUser();
   const startTime = new Date(userStore.user.startedOn);
 
@@ -141,8 +146,15 @@ onMounted(async () => {
   timer.value = setInterval(() => {
     if (!userStore.user.startedOn) {
       remainingTime.value = "calculating...";
-      //this is a hack to fix NaN timer error by refetching the user
       return;
+    }
+    //warn dialog if time is less than 10 minutes
+    if (minLeft.value < 10) {
+      // $q.dialog({
+      //   title: "Warning",
+      //   message: "You have less than 10 minutes left!",
+      //   color: "negative",
+      // });
     }
     //startTime from shanghai to local time
     const localStartedTime = new Date(

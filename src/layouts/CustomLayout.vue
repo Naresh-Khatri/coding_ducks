@@ -125,6 +125,18 @@ const colors = computed(
 );
 
 onMounted(async () => {
+  setTimeout(() => {
+    if (remainingTime.value == "calculating...") {
+      console.log("trying to logout");
+      $q.notify({
+        position: "top",
+        message: "There was a problem! Please login again.",
+        color: "info",
+      });
+      $router.push({ name: "login" });
+      userStore.logout();
+    }
+  }, 3000);
   await problemStore.fetchProblems();
   setTimeout(async () => {
     await submissionStore.fetchSubmissions();

@@ -1,8 +1,8 @@
 {
-  "name": "hackathon",
+  "name": "coding-ducks",
   "version": "0.0.1",
-  "description": "hackathon",
-  "productName": "hackathon",
+  "description": "coding-ducks",
+  "productName": "coding-ducks",
   "author": "naresh-khatri <naresh.khatri2345@gmail.com>",
   "private": true,
   "scripts": {

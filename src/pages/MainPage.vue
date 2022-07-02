@@ -192,19 +192,26 @@ const changeLang = (lang) => {
 };
 
 const inactiveWarnCount = ref(3);
+const showingWarning = ref(false);
 
+const showWarningdialog = () => {
+  if (document.visibilityState == "hidden") {
+    if (showingWarning.value) return;
+    inactiveWarnCount.value--;
+    showingWarning.value = true;
+    $q.dialog({
+      component: InactiveWarnDialog,
+      componentProps: {
+        count: inactiveWarnCount.value,
+      },
+    })
+      .onOk(() => (showingWarning.value = false))
+      .onCancel(() => (showingWarning.value = false))
+      .onDismiss(() => (showingWarning.value = false));
+  }
+};
 onMounted(() => {
-  document.addEventListener("visibilitychange", (e) => {
-    if (document.visibilityState == "hidden") {
-      inactiveWarnCount.value--;
-      $q.dialog({
-        component: InactiveWarnDialog,
-        componentProps: {
-          count: inactiveWarnCount.value,
-        },
-      });
-    }
-  });
+  document.addEventListener("visibilitychange", showWarningdialog);
   loadSavedFile();
   //TODO: show 404 page if problem not found
   try {
@@ -215,7 +222,7 @@ onMounted(() => {
   }
 });
 onUnmounted(() => {
-  document.removeEventListener("visibilitychange", (e) => {});
+  document.removeEventListener("visibilitychange", showWarningdialog);
 });
 
 const loadSavedFile = () => {

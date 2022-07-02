@@ -55,6 +55,13 @@ https://img.favpng.com/15/12/25/google-logo-google-adwords-g-suite-google-accoun
               style="width: 100%"
               :rules="[(val) => val.length == 10 || 'Incorrect roll']"
             >
+              <template v-slot:hint>
+                {{
+                  user.roll.length != 10
+                    ? "Must containe 10 characters"
+                    : "Correct"
+                }}
+              </template>
               <template v-slot:prepend>
                 <q-icon name="tag" />
               </template>
@@ -191,10 +198,10 @@ onMounted(async () => {
     const user = await authServices.getCurrentUser();
     if (user) {
       $router.push("/main");
-      $q.notify({
-        message: "You are already logged in",
-        color: "green",
-      });
+      // $q.notify({
+      //   message: "You are already logged in",
+      //   color: "green",
+      // });
     }
   }, 500);
 });

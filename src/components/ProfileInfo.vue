@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center q-gutter-md row">
     <div class="q-mx-md flex flex-center text-body1">
-      {{ submissionStore.score }}/100
+      {{ Math.floor(submissionStore.score) }}/100
       <q-icon style="margin-top: -5px" size="md" name="star" color="yellow" />
     </div>
     <div>

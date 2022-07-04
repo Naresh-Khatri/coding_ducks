@@ -174,7 +174,7 @@ onMounted(async () => {
     );
     const currTime = new Date();
     minLeft.value =
-      59 - date.getDateDiff(currTime, localStartedTime, "minutes");
+      79 - date.getDateDiff(currTime, localStartedTime, "minutes");
     secsLeft.value =
       60 - (date.getDateDiff(currTime, startTime, "seconds") % 60);
     remainingTime.value = `00:${

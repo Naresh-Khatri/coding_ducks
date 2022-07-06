@@ -29,7 +29,6 @@
         :extensions="extensions"
       /> -->
     <codemirror
-      style="font-family: monospace"
       v-model="cCode"
       placeholder="Code goes here..."
       :style="{
@@ -163,8 +162,9 @@ onMounted(() => {
 * {
   overflow: hidden;
 }
-.monaco-container:deep(.cm-editor) {
-  display: inline;
+
+:deep(.cm-content) {
+  font-family: Hack, monospace;
 }
 .monaco-editor {
   border-radius: 30px;
@@ -231,20 +231,4 @@ onMounted(() => {
   -webkit-box-shadow: -5px 7px 0px 1px rgba(0, 0, 0, 1);
   -moz-box-shadow: -5px 7px 0px 1px rgba(0, 0, 0, 1);
 }
-.CodeMirror * {
-  /*          ^
-*/
-  font-family: Arial, monospace;
-  font-size: 16px;
-}
-// .codemirror-editor {
-//   display: block;
-//   font-family: monospace;
-//   white-space: pre;
-//   font-size: 1.5em;
-//   border-radius: 0 0 10px 10px;
-// }
-// .CodeMirror * {
-//   font-family: Consolas, monaco, monospace;
-// }
 </style>

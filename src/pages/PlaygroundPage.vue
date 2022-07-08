@@ -33,7 +33,19 @@
                 <div class="q-py-sm flex flex-center">
                   <div class="bar"></div>
                 </div>
-                Console:
+                <div class="row flex justify-between q-px-lg">
+                  <div>Console:</div>
+                  <div>
+                    <q-btn
+                      round
+                      flat
+                      label="share"
+                      icon="img:src/assets/whatsapp.svg"
+                      color="positive"
+                      @click="shareCode"
+                    />
+                  </div>
+                </div>
               </div>
               <pre
                 class="q-pa-md bg-white"
@@ -59,7 +71,8 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import { useQuasar } from "quasar";
+import { useRoute } from "vue-router";
+import { useQuasar, copyToClipboard } from "quasar";
 import { api } from "src/boot/axios";
 
 import Console from "src/components/OutputConsole.vue";
@@ -69,6 +82,8 @@ import { python } from "@codemirror/lang-python";
 import { cpp } from "@codemirror/lang-cpp";
 import { oneDark } from "@codemirror/theme-one-dark";
 const extensions = [python(), oneDark];
+
+const $route = useRoute();
 
 const splitterModel = ref(60);
 const code = ref("");
@@ -83,8 +98,12 @@ const change = (e) => {
 
 const $q = useQuasar();
 onMounted(() => {
-  //check for prev code in localstorage
-  loadSavedFile();
+  //check for share params
+  checkShareParams();
+
+  //check for prev code in localstorage when not sharing
+  if (!$route.query.code) loadSavedFile();
+
   //hide dialog in dev server
   if (window.location.port === "9000") return;
   $q.dialog({
@@ -108,13 +127,12 @@ const loadSavedFile = () => {
   updateEditorKey.value++;
 };
 
-const updateSaveFile = () => {
-  const file = {
-    qNum: problemStore.currentProblem.id,
-    code: code.value,
-    lang: selectedLang.value,
-  };
-  $q.localStorage.set(`savedFile${$route.params.problemNum}`, file);
+const checkShareParams = () => {
+  const shareCode = $route.query.code;
+  if (shareCode) {
+    code.value = shareCode;
+    $q.notify({ message: "Shared code loaded 😎", color: "positive" });
+  }
 };
 
 const result = ref("");
@@ -128,6 +146,23 @@ const run = async () => {
     result.value = res.data;
   } catch (err) {
     console.log(err);
+  }
+};
+const shareCode = () => {
+  try {
+    copyToClipboard(code.value);
+    if (!navigator) throw new Error("No navigator");
+    navigator.share({
+      title: "Coding Ducks 🦆",
+      text: "Hey, check out this code I wrote for you!",
+      url: window.location.href + "?code=" + code.value,
+    });
+  } catch (err) {
+    console.log(err);
+    $q.notify({
+      message: "Your browser doesnt support sharing",
+      color: "negative",
+    });
   }
 };
 </script>

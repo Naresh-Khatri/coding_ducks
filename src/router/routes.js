@@ -11,9 +11,9 @@ const routes = [
     component: () => import("pages/TestPage.vue"),
   },
   {
-    path: "/practice",
-    name: "practice",
-    component: () => import("pages/PracticePage.vue"),
+    path: "/playground",
+    name: "playground",
+    component: () => import("pages/PlaygroundPage.vue"),
   },
 
   {

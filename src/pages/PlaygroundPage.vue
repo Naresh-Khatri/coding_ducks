@@ -155,7 +155,7 @@ const shareCode = () => {
     navigator.share({
       title: "Coding Ducks 🦆",
       text: "Hey, check out this code I wrote for you!",
-      url: window.location.href + "?code=" + code.value,
+      url: "https://coding-ducks.netlify.app/#/playground?code=" + code.value,
     });
   } catch (err) {
     console.log(err);

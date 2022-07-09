@@ -7,22 +7,22 @@
           <div class="row q-pa-lg">
             <div class="col">
               <q-img
-                style="max-width: 500px"
+                style="width: 80%"
                 src="https://ik.imagekit.io/couponluxury/86844d70936397.5bb439fbdbf6b_O3aiJ_elz.gif"
               />
             </div>
             <div class="col flex flex-center">
-              <div class="text-h3">
+              <div style="font-size: 2em">
                 Awesome job! Now, let's take a look at your feedback.
               </div>
             </div>
           </div>
         </div>
         <div v-else-if="step == 1" class="flex column flex-center">
-          <div class="text-h2 text-center">
+          <div class="text-center" style="font-size: 2em">
             How was your experience with the user interface?
           </div>
-          <div class="flex items-center" style="margin-top: 150px">
+          <div class="flex items-center" style="margin-top: 50px">
             bad
             <q-rating
               style="margin: 0 20px"
@@ -37,10 +37,10 @@
           <div class="q-mt-md text-body1">(Tap on the ducks to rate)</div>
         </div>
         <div v-else-if="step == 2" class="flex column flex-center">
-          <div class="text-h2 text-center">
+          <div class="text-center" style="font-size: 2em">
             How was the difficulty level of the questions?
           </div>
-          <div class="flex items-center" style="margin-top: 150px">
+          <div class="flex items-center" style="margin-top: 50px">
             easy
             <q-rating
               style="margin: 0 20px"
@@ -55,8 +55,10 @@
           <div class="q-mt-md text-body1">(Tap on the ducks to rate)</div>
         </div>
         <div v-else-if="step == 3" class="flex column flex-center">
-          <div class="text-h2 text-center">How was the event usefullness?</div>
-          <div class="flex items-center" style="margin-top: 150px">
+          <div class="text-center" style="font-size: 2em">
+            How was the event usefullness?
+          </div>
+          <div class="flex items-center" style="margin-top: 50px">
             not useful
             <q-rating
               style="margin: 0 20px"
@@ -71,8 +73,10 @@
           <div class="q-mt-md text-body1">(Tap on the ducks to rate)</div>
         </div>
         <div v-else-if="step == 4" class="flex column flex-center">
-          <div class="text-h2 text-center">How was the overall experience?</div>
-          <div class="flex items-center" style="margin-top: 150px">
+          <div class="text-center" style="font-size: 2em">
+            How was the overall experience?
+          </div>
+          <div class="flex items-center" style="margin-top: 50px">
             bad
             <q-rating
               style="margin: 0 20px"
@@ -87,12 +91,12 @@
           <div class="q-mt-md text-body1">(Tap on the ducks to rate)</div>
         </div>
         <div v-else-if="step == 5" class="flex column flex-center">
-          <div class="text-h2 text-center">
+          <div class="text-center" style="font-size: 2em">
             Would you like to see future events like this?
           </div>
           <div
             class="flex items-center justify-evenly"
-            style="margin-top: 150px; width: 100%"
+            style="margin-top: 50px; width: 100%"
           >
             <div
               class="flex column items-center"
@@ -119,10 +123,12 @@
           </div>
         </div>
         <div v-else-if="step == 6" class="flex column flex-center">
-          <div class="text-h2 text-center">Got any comments? (optional)</div>
+          <div class="text-center" style="font-size: 2em">
+            Got any comments? (optional)
+          </div>
           <div
             class="flex items-center justify-evenly"
-            style="margin-top: 150px; width: 100%"
+            style="margin-top: 50px; width: 100%"
           >
             <q-input
               style="width: 600px"
@@ -134,12 +140,12 @@
           </div>
         </div>
         <div v-else class="flex column flex-center">
-          <div class="text-h2 text-center">
+          <div class="text-center" style="font-size: 2em">
             We really appreciate you for your time and effort.
           </div>
           <div
             class="flex items-center justify-evenly"
-            style="margin-top: 150px; width: 100%"
+            style="margin-top: 50px; width: 100%"
           >
             <q-btn
               size="50px"

@@ -57,7 +57,7 @@
           </div>
         </section>
         <section class="col-4 flex justify-center">
-          <q-img style="max-width: 100%" :src="HeroImg" />
+          <img style="width: 100%" :src="HeroImg" />
         </section>
       </main>
     </div>

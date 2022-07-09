@@ -40,10 +40,11 @@
                       round
                       flat
                       label="share"
-                      icon="img:src/assets/whatsapp.svg"
                       color="positive"
                       @click="shareCode"
-                    />
+                    >
+                      <img width="30" :src="whatsappLogo" />
+                    </q-btn>
                   </div>
                 </div>
               </div>
@@ -74,6 +75,8 @@ import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useQuasar, copyToClipboard } from "quasar";
 import { api } from "src/boot/axios";
+
+import whatsappLogo from "src/assets/whatsapp.svg";
 
 import Console from "src/components/OutputConsole.vue";
 

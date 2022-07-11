@@ -13,7 +13,14 @@ const routes = [
   {
     path: "/playground",
     name: "playground",
-    component: () => import("pages/PlaygroundPage.vue"),
+    component: () => import("layouts/PlaygroundLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "playground",
+        component: () => import("pages/PlaygroundPage.vue"),
+      },
+    ],
   },
 
   {

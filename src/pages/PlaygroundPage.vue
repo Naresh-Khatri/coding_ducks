@@ -1,73 +1,67 @@
 <template>
-  <q-layout>
-    <q-page-container>
-      <q-page>
-        <q-splitter v-model="splitterModel" horizontal style="height: 100vh">
-          <template v-slot:before>
-            <div style="height: 100%">
-              <codemirror
-                v-model="code"
-                placeholder="Code goes here..."
-                class="full-width"
-                :style="{
-                  height: '100%',
-                  fontSize: '16px',
-                }"
-                :autofocus="true"
-                :indent-with-tab="true"
-                :tabSize="4"
-                :extensions="extensions"
-                @change="change"
-              />
-            </div>
-          </template>
-          <template v-slot:separator>
-            <q-avatar style="height: 50px" size="40px"> </q-avatar>
-          </template>
-          <template v-slot:after>
-            <div style="background: #282c34">
-              <div
-                class="text-center bg-white text-h6"
-                style="border-radius: 25px 25px 0px 0px"
-              >
-                <div class="q-py-sm flex flex-center">
-                  <div class="bar"></div>
-                </div>
-                <div class="row flex justify-between q-px-lg">
-                  <div>Console:</div>
-                  <div>
-                    <q-btn
-                      round
-                      flat
-                      label="share"
-                      color="positive"
-                      @click="shareCode"
-                    >
-                      <img width="30" :src="whatsappLogo" />
-                    </q-btn>
-                  </div>
-                </div>
-              </div>
-              <pre
-                class="q-pa-md bg-white"
-                style="font-size: 16px; margin: 0; font-family: Hack, monospace"
-                >{{ result.stdout || result.error }}</pre
-              >
-            </div>
-          </template>
-        </q-splitter>
-        <q-page-sticky position="bottom-right" :offset="[30, 30]">
-          <q-btn
-            round
-            size="lg"
-            icon="play_arrow"
-            color="positive"
-            @click="run"
+  <q-page>
+    <q-splitter
+      v-model="splitterModel"
+      horizontal
+      style="height: 94vh; overflow: hidden"
+    >
+      <template v-slot:before>
+        <div style="height: 100%">
+          <codemirror
+            v-model="code"
+            placeholder="Code goes here..."
+            class="full-width"
+            :style="{
+              height: '100%',
+              fontSize: '16px',
+            }"
+            :autofocus="true"
+            :indent-with-tab="true"
+            :tabSize="4"
+            :extensions="extensions"
+            @change="change"
           />
-        </q-page-sticky>
-      </q-page>
-    </q-page-container>
-  </q-layout>
+        </div>
+      </template>
+      <template v-slot:separator>
+        <q-avatar style="height: 50px" size="40px"> </q-avatar>
+      </template>
+      <template v-slot:after>
+        <div style="background: #282c34; overflow: hidden" class="full-height">
+          <div
+            class="text-center bg-white text-h6 full-height"
+            style="border-radius: 25px 25px 0px 0px"
+          >
+            <div class="q-py-sm flex flex-center">
+              <div class="bar"></div>
+            </div>
+            <div class="row flex justify-between q-px-lg">
+              <div>Console:</div>
+              <div>
+                <q-btn
+                  round
+                  flat
+                  label="share"
+                  color="positive"
+                  @click="shareCode"
+                >
+                  <img width="30" :src="whatsappLogo" />
+                </q-btn>
+              </div>
+            </div>
+          </div>
+          <pre
+            class="q-pa-md bg-white"
+            style="font-size: 16px; margin: 0; font-family: Hack, monospace"
+            >{{ result.stdout || result.error }}</pre
+          >
+        </div>
+      </template>
+    </q-splitter>
+    <q-page-sticky position="bottom-right" :offset="[30, 30]">
+      <q-btn round size="lg" icon="play_arrow" color="positive" @click="run" />
+    </q-page-sticky>
+  </q-page>
 </template>
 
 <script setup>
@@ -158,7 +152,9 @@ const shareCode = () => {
     navigator.share({
       title: "Coding Ducks 🦆",
       text: "Hey, check out this code I wrote for you!",
-      url: "https://coding-ducks.netlify.app/#/playground?code=" + code.value,
+      url:
+        "https://coding-ducks.netlify.app/#/playground?code=" +
+        JSON.stringify(code.value),
     });
   } catch (err) {
     console.log(err);

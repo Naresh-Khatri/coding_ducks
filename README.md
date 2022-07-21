@@ -1,7 +1,16 @@
-# Quasar App (quasar-project)
+# Your voice
 
-A Quasar Project
+> New way to communicate
 
+## Install [Nodejs](https://nodejs.org/en/)
+
+## Install Quasar
+```
+yarn global add @quasar/cli
+# or
+npm i -g @quasar/cli
+```
+  
 ## Install the dependencies
 ```bash
 yarn
@@ -37,5 +46,8 @@ npm run format
 quasar build
 ```
 
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+## Screenshots
+![Home](https://github.com/Naresh-Khatri/your_voice/blob/main/screenshots/Screenshot_20220707_074948.png?raw=true)
+![Home](https://github.com/Naresh-Khatri/your_voice/blob/main/screenshots/Screenshot_20220707_074954.png?raw=true)
+![Home](https://github.com/Naresh-Khatri/your_voice/blob/main/screenshots/Screenshot_20220707_075003.png?raw=true)
+![Home](https://github.com/Naresh-Khatri/your_voice/blob/main/screenshots/Screenshot_20220707_075316.png?raw=true)

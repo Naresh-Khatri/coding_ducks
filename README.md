@@ -2,8 +2,6 @@
 
 > New way to communicate
 
-A Quasar Project
-
 ## Install [Nodejs](https://nodejs.org/en/)
 
 ## Install Quasar

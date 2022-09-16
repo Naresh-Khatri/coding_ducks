@@ -1,6 +1,6 @@
-# Your voice
+# Coding ducks
 
-> New way to communicate
+> A coding platform
 
 ## Install [Nodejs](https://nodejs.org/en/)
 
@@ -47,7 +47,7 @@ quasar build
 ```
 
 ## Screenshots
-![Home](https://github.com/Naresh-Khatri/your_voice/blob/main/screenshots/Screenshot_20220707_074948.png?raw=true)
-![Home](https://github.com/Naresh-Khatri/your_voice/blob/main/screenshots/Screenshot_20220707_074954.png?raw=true)
-![Home](https://github.com/Naresh-Khatri/your_voice/blob/main/screenshots/Screenshot_20220707_075003.png?raw=true)
-![Home](https://github.com/Naresh-Khatri/your_voice/blob/main/screenshots/Screenshot_20220707_075316.png?raw=true)
+![image](https://github.com/Naresh-Khatri/coding_ducks/blob/main/screenshots/Screenshot_20220717_200029.png?raw=true)
+![image](https://github.com/Naresh-Khatri/coding_ducks/blob/main/screenshots/Screenshot_20220717_200157.png?raw=true)
+![image](https://github.com/Naresh-Khatri/coding_ducks/blob/main/screenshots/Screenshot_20220717_200212.png?raw=true)
+![image](https://github.com/Naresh-Khatri/coding_ducks/blob/main/screenshots/Screenshot_20220717_200244.png?raw=true)
